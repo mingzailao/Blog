@@ -17,6 +17,18 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>None/LeetCode/ThreeSum/</loc>
+     <lastmod>2016-11-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/LeetCode/ThreeSumClosest/</loc>
+     <lastmod>2016-11-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
 </urlset>

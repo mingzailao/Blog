@@ -8,7 +8,7 @@
   
   
   
-  <title>WordDictionary - Mingzailao Programming Blog</title>
+  <title>ThreeSumClosest - Mingzailao Programming Blog</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "WordDictionary";
-    var mkdocs_page_input_path = "LeetCode/WordDictionary.md";
-    var mkdocs_page_url = "/LeetCode/WordDictionary/";
+    var mkdocs_page_name = "ThreeSumClosest";
+    var mkdocs_page_input_path = "LeetCode/ThreeSumClosest.md";
+    var mkdocs_page_url = "/LeetCode/ThreeSumClosest/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -69,15 +69,8 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">WordDictionary</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#q211-add-and-search-word-data-structure-design">Q211 : Add and Search Word - Data structure design</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../WordDictionary/">WordDictionary</a>
         
     </li>
 
@@ -90,8 +83,15 @@
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../ThreeSumClosest/">ThreeSumClosest</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">ThreeSumClosest</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#q16-3sum-closest">Q16 : 3Sum Closest</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -125,7 +125,7 @@
         
       
     
-    <li>WordDictionary</li>
+    <li>ThreeSumClosest</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -139,74 +139,63 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="q211-add-and-search-word-data-structure-design">Q211 : Add and Search Word - Data structure design<a class="headerlink" href="#q211-add-and-search-word-data-structure-design" title="Permanent link">&para;</a></h1>
-<p>Design a data structure that supports the following two operations: </p>
-<pre><code class="c++">void addWord(word)
-bool search(word)
+                <h1 id="q16-3sum-closest">Q16 : 3Sum Closest<a class="headerlink" href="#q16-3sum-closest" title="Permanent link">&para;</a></h1>
+<p>Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.</p>
+<pre><code class="text">    For example, given array S = {-1 2 1 -4}, and target = 1.
+
+    The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 </code></pre>
 
-<p>search(word) can search a literal word or a regular expression string containing only letters a-z or .. A . means it can represent any one letter.</p>
-<p>For example:</p>
-<pre><code class="text">
-addWord(&quot;bad&quot;)
-addWord(&quot;dad&quot;)
-addWord(&quot;mad&quot;)
-search(&quot;pad&quot;) -&gt; false
-search(&quot;bad&quot;) -&gt; true
-search(&quot;.ad&quot;) -&gt; true
-search(&quot;b..&quot;) -&gt; true
-</code></pre>
-
-<pre><code class="c++">#ifndef WORDDICTORY_H_
-#define WORDDICTORY_H_
-#include&lt;unordered_map&gt;
-#include&lt;string&gt;
-using std::string;
-using std::unordered_map;
-class WordDictory{
+<pre><code class="c++">#include&lt;vector&gt;
+#include&lt;algorithm&gt;
+#include&lt;iterator&gt;
+#include&lt;iostream&gt;
+#include&lt;iostream&gt;
+#include&lt;numeric&gt;
+using namespace std;
+class Solution;
+class Solution {
 public:
-  struct TrieNode{
-    bool isString=false;
-    unordered_map&lt;char,TrieNode*&gt; leaves;
-  };
-private:
-  TrieNode *root_;
-public:
-  WordDictory(){
-    root_=new TrieNode;
-    root-&gt;isString=true;
-  }
-  void addWord(string word){
-    auto *p=_root;
-    for(const auto &amp; c:word){
-      if(p-&gt;leaves.find(c)==p-&gt;leaves.cend()){
-        p-&gt;leaves[c]=new TrieNode;
-      }
-      p=p-&gt;leaves[c];
-    }
-    p-&gt;isString=true;
-  }
-  bool search(string word){
-    return searchWord(word,_root,0)
-  }
-  bool search(string word,TrieNode *node,int s){
-    if(s==word.length()){
-      return node-&gt;isString;
-    }
-    if(node-&gt;leaves.find(word[s])!=node-&gt;leaves.cend()){
-      return seachWord(word,node-&gt;leaves[s],s+1);
-    }
-    else if(word[s]=='.'){
-      for(const auto &amp;i:node-&gt;leaves){
-        if(searchWord(word,node-&gt;leaves[i],s+1)){
-          return true;
+  /**
+   * @param numbers : Give an array numbers of n integer
+   * @return : Find all unique triplets in the array which gives the sum of zero.
+   */
+  int threeSumClosest(vector&lt;int&gt; nums,int target){
+    int ans =numeric_limits&lt;int&gt;::max();
+    int min_diff = numeric_limits&lt;int&gt;::max();
+    std::sort(nums.begin(), nums.end());
+    for(vector&lt;int&gt;::size_type i=0;i!=nums.size()-2;i++){
+      if(i==0||nums[i]!=nums[i-1]){
+        vector&lt;int&gt;::size_type j=i+1;
+        vector&lt;int&gt;::size_type k=nums.size()-1;
+        while(j&lt;k){
+          const auto sum=nums[i]+nums[j]+nums[k];
+          if(sum&gt;target){
+            --k;
+          }
+          else if(sum&lt;target){
+            ++j;
+          }
+          else{
+            return target;
+          }
+          if(abs(sum-target)&lt;min_diff){
+            min_diff=abs(sum-target);
+            ans=sum;
+          }
         }
       }
     }
-    return false;
+    return ans;
   }
 };
-#endif
+
+int main(){
+  vector&lt;int&gt; a={-1,0,1,2,-1,-4};
+  Solution solution;
+  std::cout&lt;&lt;solution.threeSumClosest(a,1)&lt;&lt;std::endl;
+}
+
 </code></pre>
               
             </div>
@@ -215,10 +204,8 @@ public:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../ThreeSum/" class="btn btn-neutral float-right" title="ThreeSum">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../.." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ThreeSum/" class="btn btn-neutral" title="ThreeSum"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -246,10 +233,8 @@ public:
           <a href="https://github.com/mingzailao/Blog" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../ThreeSum/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../ThreeSum/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

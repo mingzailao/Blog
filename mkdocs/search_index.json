@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Welcome to mingzailao Programming Blog\n\n\nThis blog is only for programming, if you like it, please fork it on Github.\n\n\nLeetCode\n\n\nWordDictionary", 
+            "text": "img.latex-inline { vertical-align: middle; }\n\n\nWelcome to mingzailao Programming Blog\n\n\nThis blog is only for programming, if you like it, please fork it on Github.\n\n\nLeetCode\n\n\n\n\nWordDictionary", 
             "title": "Home"
         }, 
         {
@@ -17,7 +17,7 @@
         }, 
         {
             "location": "/LeetCode/WordDictionary/", 
-            "text": "#ifndef WORDDICTORY_H_\n#define WORDDICTORY_H_\n#include\nunordered_map\n\n#include\nstring\n\nusing std::string;\nusing std::unordered_map;\nclass WordDictory{\npublic:\n  struct TrieNode{\n    bool isString=false;\n    unordered_map\nchar,TrieNode*\n leaves;\n  };\nprivate:\n  TrieNode *root_;\npublic:\n  WordDictory(){\n    root_=new TrieNode;\n    root-\nisString=true;\n  }\n  void addWord(string word){\n    auto *p=_root;\n    for(const auto \n c:word){\n      if(p-\nleaves.find(c)==p-\nleaves.cend()){\n        p-\nleaves[c]=new TrieNode;\n      }\n      p=p-\nleaves[c];\n    }\n    p-\nisString=true;\n  }\n  bool search(string word){\n    return searchWord(word,_root,0)\n  }\n  bool search(string word,TrieNode *node,int s){\n    if(s==word.length()){\n      return node-\nisString;\n    }\n    if(node-\nleaves.find(word[s])!=node-\nleaves.cend()){\n      return seachWord(word,node-\nleaves[s],s+1);\n    }\n    else if(word[s]=='.'){\n      for(const auto \ni:node-\nleaves){\n        if(searchWord(word,node-\nleaves[i],s+1)){\n          return true;\n        }\n      }\n    }\n    return false;\n  }\n};\n#endif", 
+            "text": "img.latex-inline { vertical-align: middle; }\n\n\nDesign a data stucture:\n\n\n#ifndef WORDDICTORY_H_\n#define WORDDICTORY_H_\n#include\nunordered_map\n\n#include\nstring\n\nusing std::string;\nusing std::unordered_map;\nclass WordDictory{\npublic:\n  struct TrieNode{\n    bool isString=false;\n    unordered_map\nchar,TrieNode*\n leaves;\n  };\nprivate:\n  TrieNode *root_;\npublic:\n  WordDictory(){\n    root_=new TrieNode;\n    root-\nisString=true;\n  }\n  void addWord(string word){\n    auto *p=_root;\n    for(const auto \n c:word){\n      if(p-\nleaves.find(c)==p-\nleaves.cend()){\n        p-\nleaves[c]=new TrieNode;\n      }\n      p=p-\nleaves[c];\n    }\n    p-\nisString=true;\n  }\n  bool search(string word){\n    return searchWord(word,_root,0)\n  }\n  bool search(string word,TrieNode *node,int s){\n    if(s==word.length()){\n      return node-\nisString;\n    }\n    if(node-\nleaves.find(word[s])!=node-\nleaves.cend()){\n      return seachWord(word,node-\nleaves[s],s+1);\n    }\n    else if(word[s]=='.'){\n      for(const auto \ni:node-\nleaves){\n        if(searchWord(word,node-\nleaves[i],s+1)){\n          return true;\n        }\n      }\n    }\n    return false;\n  }\n};\n#endif", 
             "title": "WordDictionary"
         }
     ]

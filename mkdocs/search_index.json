@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Welcome to mingzailao Programming Blog\n\n\nThis blog is only for programming, if you like it, please fork it on Github.\n\n\nLeetCode\n\n\n\n\nWordDictionary\n\n\n\n\nThanks To:\n\n\n\n\n\u6dfb\u52a0\u4e86\u5bf9\u4e8elatex\u7684\u652f\u6301\u3002Thanks for \nissues on Github", 
+            "text": "Welcome to mingzailao Programming Blog\n\n\nThis blog is only for programming, if you like it, please fork it on Github.\n\n\nLeetCode\n\n\n\n\nWordDictionary\n\n\n\n\nThanks To:\n\n\n\n\n\u6dfb\u52a0\u4e86\u5bf9\u4e8elatex\u7684\u652f\u6301\u3002Thanks for \nissues on Github\n\n\n\n\nTODO List\n\n\n\n\n\u5bf9\u4e8eorg-mode \u8f6cmarkdown\u7684\u4f18\u5316\u3002\u4f7f\u5f97\u53ef\u4ee5\u76f4\u63a5\u4f7f\u7528;\n\n\n\u4fee\u6539\u9ed8\u8ba4\u7684org-export-to-markdown file \u7684\u5b58\u50a8\u4f4d\u7f6e\u53ef\u4ee5\u76f4\u63a5\u7531org\u751f\u6210\u76f8\u5e94\u7684markdown\u3002", 
             "title": "Home"
         }, 
         {
@@ -19,6 +19,11 @@
             "location": "/#thanks-to", 
             "text": "\u6dfb\u52a0\u4e86\u5bf9\u4e8elatex\u7684\u652f\u6301\u3002Thanks for  issues on Github", 
             "title": "Thanks To:"
+        }, 
+        {
+            "location": "/#todo-list", 
+            "text": "\u5bf9\u4e8eorg-mode \u8f6cmarkdown\u7684\u4f18\u5316\u3002\u4f7f\u5f97\u53ef\u4ee5\u76f4\u63a5\u4f7f\u7528;  \u4fee\u6539\u9ed8\u8ba4\u7684org-export-to-markdown file \u7684\u5b58\u50a8\u4f4d\u7f6e\u53ef\u4ee5\u76f4\u63a5\u7531org\u751f\u6210\u76f8\u5e94\u7684markdown\u3002", 
+            "title": "TODO List"
         }, 
         {
             "location": "/LeetCode/WordDictionary/", 
@@ -49,6 +54,16 @@
             "location": "/LeetCode/ThreeSumClosest/#q16-3sum-closest", 
             "text": "Given an array S of n integers, find three integers in S such that the sum is closest to a given number, target. Return the sum of the three integers. You may assume that each input would have exactly one solution.      For example, given array S = {-1 2 1 -4}, and target = 1.\n\n    The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).  #include vector \n#include algorithm \n#include iterator \n#include iostream \n#include iostream \n#include numeric \nusing namespace std;\nclass Solution;\nclass Solution {\npublic:\n  /**\n   * @param numbers : Give an array numbers of n integer\n   * @return : Find all unique triplets in the array which gives the sum of zero.\n   */\n  int threeSumClosest(vector int  nums,int target){\n    int ans =numeric_limits int ::max();\n    int min_diff = numeric_limits int ::max();\n    std::sort(nums.begin(), nums.end());\n    for(vector int ::size_type i=0;i!=nums.size()-2;i++){\n      if(i==0||nums[i]!=nums[i-1]){\n        vector int ::size_type j=i+1;\n        vector int ::size_type k=nums.size()-1;\n        while(j k){\n          const auto sum=nums[i]+nums[j]+nums[k];\n          if(sum target){\n            --k;\n          }\n          else if(sum target){\n            ++j;\n          }\n          else{\n            return target;\n          }\n          if(abs(sum-target) min_diff){\n            min_diff=abs(sum-target);\n            ans=sum;\n          }\n        }\n      }\n    }\n    return ans;\n  }\n};\n\nint main(){\n  vector int  a={-1,0,1,2,-1,-4};\n  Solution solution;\n  std::cout solution.threeSumClosest(a,1) std::endl;\n}", 
             "title": "Q16 : 3Sum Closest"
+        }, 
+        {
+            "location": "/LeetCode/FourSum/", 
+            "text": "Q18 : 4Sum\n\n\nGiven an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.\n\n\nNote: The solution set must not contain duplicate quadruplets.\n\n\nFor example, given array S = [1, 0, -1, 0, -2, 2], and target = 0.\n\nA solution set is:\n[\n  [-1,  0, 0, 1],\n  [-2, -1, 1, 2],\n  [-2,  0, 0, 2]\n]\n\n\n\n\n#include\nalgorithm\n\n#include\nvector\n\n#include\niostream\n\nusing namespace std;\n\n\nclass Solution;\nclass Solution{\npublic:\n  vector\nvector\nint\n \n fourSum(vector\nint\n \nnum, int target){\n    vector\nint\n::size_type left,right;\n    int sum;\n    std::sort(num.begin(), num.end());\n    vector\nvector\nint\n result;\n    for(vector\nint\n::size_type i=0;i\nnum.size()-3;i++){\n      if(i\n num[i]==num[i-1]){\n        continue;\n      }\n      for(vector\nint\n::size_type j=i+1;j\nnum.size()-2;j++){\n        if(j!=i+1\n num[j]==num[j-1]){\n          continue;\n        }\n        sum=target-num[i]-num[j];\n        left=j+1;\n        right=num.size()-1;\n        while(left\nright){\n          if(num[left]+num[right]==sum){\n            result.push_back({num[i],num[j],num[left],num[right]});\n            ++left;\n            --right;\n            while(left\nright\nnum[left]==num[left-1]){\n              ++left;\n            }\n            while(left\nright\nnum[right]==num[right+1]){\n              --right;\n            }\n          }\n          else{\n            if(num[left]+num[right]\nsum){\n              --right;\n            }\n            else{\n              ++left;\n            }\n          }\n        }\n      }\n    }\n    return result;\n  }\n};\n\n\nint main(){\n  vector\nint\n a={-1,0,1,2,-1,-4};\n  Solution solution;\n  for(const auto item:solution.fourSum(a,0)){\n    for(const auto i:item){\n      std::cout\ni\n \n;\n    }\n    std::cout\nstd::endl;\n  }\n}", 
+            "title": "FourSum"
+        }, 
+        {
+            "location": "/LeetCode/FourSum/#q18-4sum", 
+            "text": "Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.  Note: The solution set must not contain duplicate quadruplets.  For example, given array S = [1, 0, -1, 0, -2, 2], and target = 0.\n\nA solution set is:\n[\n  [-1,  0, 0, 1],\n  [-2, -1, 1, 2],\n  [-2,  0, 0, 2]\n]  #include algorithm \n#include vector \n#include iostream \nusing namespace std;\n\n\nclass Solution;\nclass Solution{\npublic:\n  vector vector int    fourSum(vector int   num, int target){\n    vector int ::size_type left,right;\n    int sum;\n    std::sort(num.begin(), num.end());\n    vector vector int  result;\n    for(vector int ::size_type i=0;i num.size()-3;i++){\n      if(i  num[i]==num[i-1]){\n        continue;\n      }\n      for(vector int ::size_type j=i+1;j num.size()-2;j++){\n        if(j!=i+1  num[j]==num[j-1]){\n          continue;\n        }\n        sum=target-num[i]-num[j];\n        left=j+1;\n        right=num.size()-1;\n        while(left right){\n          if(num[left]+num[right]==sum){\n            result.push_back({num[i],num[j],num[left],num[right]});\n            ++left;\n            --right;\n            while(left right num[left]==num[left-1]){\n              ++left;\n            }\n            while(left right num[right]==num[right+1]){\n              --right;\n            }\n          }\n          else{\n            if(num[left]+num[right] sum){\n              --right;\n            }\n            else{\n              ++left;\n            }\n          }\n        }\n      }\n    }\n    return result;\n  }\n};\n\n\nint main(){\n  vector int  a={-1,0,1,2,-1,-4};\n  Solution solution;\n  for(const auto item:solution.fourSum(a,0)){\n    for(const auto i:item){\n      std::cout i   ;\n    }\n    std::cout std::endl;\n  }\n}", 
+            "title": "Q18 : 4Sum"
         }
     ]
 }

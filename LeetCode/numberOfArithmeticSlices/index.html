@@ -8,7 +8,7 @@
   
   
   
-  <title>IsAdditiveNumber - Mingzailao Programming Blog</title>
+  <title> Arithmetic Slices - Mingzailao Programming Blog</title>
   
 
   <link rel="shortcut icon" href="../../img/favicon.ico">
@@ -23,9 +23,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "IsAdditiveNumber";
-    var mkdocs_page_input_path = "LeetCode/IsAddictiveNumber.md";
-    var mkdocs_page_url = "/LeetCode/IsAddictiveNumber/";
+    var mkdocs_page_name = " Arithmetic Slices";
+    var mkdocs_page_input_path = "LeetCode/numberOfArithmeticSlices.md";
+    var mkdocs_page_url = "/LeetCode/numberOfArithmeticSlices/";
   </script>
   
   <script src="../../js/jquery-2.1.1.min.js"></script>
@@ -97,22 +97,22 @@
 
         
             
-    <li class="toctree-l1 current">
-        <a class="current" href="./">IsAdditiveNumber</a>
-        
-            <ul>
-            
-                <li class="toctree-l3"><a href="#q306-additive-number">Q306 : Additive Number</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" href="../IsAddictiveNumber/">IsAdditiveNumber</a>
         
     </li>
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../numberOfArithmeticSlices/"> Arithmetic Slices</a>
+    <li class="toctree-l1 current">
+        <a class="current" href="./"> Arithmetic Slices</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#q413-arithmetic-slices">Q413 : Arithmetic Slices</a></li>
+                
+            
+            </ul>
         
     </li>
 
@@ -146,7 +146,7 @@
         
       
     
-    <li>IsAdditiveNumber</li>
+    <li> Arithmetic Slices</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -160,73 +160,40 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="q306-additive-number">Q306 : Additive Number<a class="headerlink" href="#q306-additive-number" title="Permanent link">&para;</a></h1>
-<p>Additive number is a string whose digits can form additive sequence.</p>
-<p>A valid additive sequence should contain at least three numbers. Except for the first two numbers, each subsequent number in the sequence must be the sum of the preceding two.</p>
-<p>For example:
-&ldquo;112358&rdquo; is an additive number because the digits can form an additive sequence: 1, 1, 2, 3, 5, 8.</p>
-<pre><code class="text">1 + 1 = 2, 1 + 2 = 3, 2 + 3 = 5, 3 + 5 = 8
+                <h1 id="q413-arithmetic-slices">Q413 : Arithmetic Slices<a class="headerlink" href="#q413-arithmetic-slices" title="Permanent link">&para;</a></h1>
+<p>A sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.</p>
+<p>For example, these are arithmetic sequence:</p>
+<pre><code>1, 3, 5, 7, 9
+7, 7, 7, 7
+3, -1, -5, -9
 </code></pre>
 
-<p>&ldquo;199100199&rdquo; is also an additive number, the additive sequence is: 1, 99, 100, 199.</p>
-<pre><code class="text">1 + 99 = 100, 99 + 100 = 199
+<p>The following sequence is not arithmetic.</p>
+<pre><code>1, 1, 2, 5, 7
 </code></pre>
 
-<p><code>Note</code>: Numbers in the additive sequence cannot have leading zeros, so sequence 1, 2, 03 or 1, 02, 3 is invalid.</p>
-<p>Given a string containing only digits &lsquo;0&rsquo;-&lsquo;9&rsquo;, write a function to determine if it&rsquo;s an additive number.</p>
-<pre><code class="c++">#include&lt;iostream&gt;
-#include&lt;algorithm&gt;
-#include&lt;string&gt;
-#include&lt;numeric&gt;
+<p>A zero-indexed array A consisting of N numbers is given. A slice of that array is any pair of integers (P, Q) such that 0 &lt;= P &lt; Q &lt; N.</p>
+<p>A slice (P, Q) of array A is called arithmetic if the sequence:
+A[P], A[p + 1], &hellip;, A[Q - 1], A[Q] is arithmetic. In particular, this means that P + 1 &lt; Q.</p>
+<p>The function should return the number of arithmetic slices in the array A.</p>
+<p><strong>Example:</strong></p>
+<pre><code>A = [1, 2, 3, 4]
 
-using std::max;
-using std::string;
+return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
+</code></pre>
 
-class Solution{
-private:
-  string add(const string&amp; a,const string&amp; b){
-    string result;
-    string::size_type reslen=max(a.length(),b.length());
-    int carry=0;
-    for(string::size_type i=0;i&lt;reslen;++i){
-      int a_digit_i=i&lt;a.length()?a[i]-'0':0;
-      int b_digit_i=i&lt;b.length()?b[i]-'0':0;
-      int sum=carry+a_digit_i+b_digit_i;
-      carry=sum/10;
-      sum=sum%10;
-      result.push_back('0'+sum);
-    }
-    if(carry){
-      result.push_back('0'+carry);
-    }
-    std::reverse(result.begin(),result.end());
-    return result;
-  }
+<pre><code class="c++">class Solution {
 public:
-  bool isAdditiveNumber(string num){
-    for(int i=1;i&lt;num.length();++i){
-      for(int j=i+1;j&lt;num.length();++j){
-        string s1=num.substr(0,i);
-        string s2=num.substr(i,j-i);
-        if((s1.length()&gt;1&amp;&amp;s1[0]=='0')||
-          (s2.length()&gt;1&amp;&amp;s2[0]=='0')){
-            continue;
-          }
-        string next=add(s1,s2);
-        string cur=s1+s2+next;
-        while(cur.length()&lt;num.length()){
-          s1=s2;
-          s2=next;
-          next=add(s1,s2);
-          cur+=next;
+    int numberOfArithmeticSlices(vector&lt;int&gt;&amp; A) {
+        int res = 0, i = 0;
+        for (int i = 0; i + 2 &lt; A.size(); ++i) {
+            const auto start = i;
+            while (i + 2 &lt; A.size() &amp;&amp; A[i + 2] + A[i] == 2 * A[i + 1]) {
+                res += (i++) - start + 1;
+            }
         }
-        if(cur==num){
-          return true;
-        }
-      }
+        return res;
     }
-    return false;
-  }
 };
 </code></pre>
               
@@ -236,10 +203,8 @@ public:
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../numberOfArithmeticSlices/" class="btn btn-neutral float-right" title=" Arithmetic Slices">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../FourSum/" class="btn btn-neutral" title="FourSum"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../IsAddictiveNumber/" class="btn btn-neutral" title="IsAdditiveNumber"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -267,10 +232,8 @@ public:
           <a href="https://github.com/mingzailao/Blog" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../FourSum/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../IsAddictiveNumber/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../numberOfArithmeticSlices/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

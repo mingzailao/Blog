@@ -182,19 +182,29 @@ A[P], A[p + 1], &hellip;, A[Q - 1], A[Q] is arithmetic. In particular, this mean
 return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
 </code></pre>
 
-<pre><code class="c++">class Solution {
+<pre><code class="c++">#include&lt;vector&gt;
+#include&lt;iostream&gt;
+using std::vector;
+class Solution {
 public:
-    int numberOfArithmeticSlices(vector&lt;int&gt;&amp; A) {
-        int res = 0, i = 0;
-        for (int i = 0; i + 2 &lt; A.size(); ++i) {
-            const auto start = i;
-            while (i + 2 &lt; A.size() &amp;&amp; A[i + 2] + A[i] == 2 * A[i + 1]) {
-                res += (i++) - start + 1;
-            }
-        }
-        return res;
+  int numberOfArithmeticSlices(vector&lt;int&gt;&amp; A) {
+    int res = 0, i = 0;
+    for (int i = 0; i + 2 &lt; A.size(); ++i) {
+      const auto start = i;
+      while (i + 2 &lt; A.size() &amp;&amp; A[i + 2] + A[i] == 2 * A[i + 1]) {
+        res += (i++) - start + 1;
+      }
     }
+    return res;
+  }
 };
+int main(){
+  vector&lt;int&gt; ivec={1,2,3,4};
+  Solution solution;
+  std::cout&lt;&lt;solution.numberOfArithmeticSlices(ivec)&lt;&lt;std::endl;
+  return 0;
+}
+
 </code></pre>
               
             </div>
